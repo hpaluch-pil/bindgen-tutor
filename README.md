@@ -9,7 +9,8 @@ Updates:
   to fix: https://github.com/rust-lang/rust/issues/68729
 - commented out `.no_unstable_rust()` in `build.rs`
   (it was deprecated and later removed from builder)
-- replaced  `` with `../README.md` in `src/lib.rs` to avoid possible Copyright issues
+- replaced  `../futurama-quotes.txt` with `../README.md`
+  in `src/lib.rs` to avoid possible Copyright issues
 
 ## Setup for Debian 11
 

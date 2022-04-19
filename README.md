@@ -40,6 +40,25 @@ $ cargo -V
 cargo 1.46.0
 ```
 
+## Setup for openSUSE 15.3
+
+Install these packages:
+```bash
+sudo zypper in clang-devel llvm-devel cargo rust libbz2-devel
+```
+
+These versions were tested:
+```bash
+$ rustc -V
+
+rustc 1.59.0
+
+$ cargo -V
+
+cargo 1.59.0
+```
+
+## Building and testing
 
 Now you can run:
 ```bash
@@ -68,6 +87,9 @@ curl -fLO https://github.com/rust-lang/rustfmt/releases/download/v1.4.38/rustfmt
 tar xvzf rustfmt_linux-x86_64_v1.4.38.tar.gz 
 sudo cp rustfmt_linux-x86_64_v1.4.38/rustfmt /usr/local/bin/
 ```
+Above is recommended even for openSUSE because their `rustfmt` package
+requires older version of Cargo.
+
 
 And then try command like:
 ```bash

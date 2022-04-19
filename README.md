@@ -1,13 +1,14 @@
 # Finished tutorial for bindgen
 
 Here is finished "bzip2 bindings tutorial" project from:
-- https://fitzgeraldnick.com/2016/12/14/using-libbindgen-in-build-rs.html
 - https://rust-lang.github.io/rust-bindgen/tutorial-0.html
+- original article (outdated by above "Book"):
+  - https://fitzgeraldnick.com/2016/12/14/using-libbindgen-in-build-rs.html
 
 Updates:
-- bumped bindgen version from `0.20.0` to `0.59.2`
+- (applies for Blog article only): bumped bindgen version from `0.20.0` to `0.59.2`
   to fix: https://github.com/rust-lang/rust/issues/68729
-- commented out `.no_unstable_rust()` in `build.rs`
+- (applies for Blog article only) :commented out `.no_unstable_rust()` in `build.rs`
   (it was deprecated and later removed from builder)
 - replaced  `../futurama-quotes.txt` with `../README.md`
   in `src/lib.rs` to avoid possible Copyright issues

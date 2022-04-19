@@ -12,14 +12,13 @@ fn main() {
     // to bindgen, and lets you build up options for
     // the resulting bindings.
     let bindings = bindgen::Builder::default()
-        // Do not generate unstable Rust code that
-        // requires a nightly rustc and enabling
-        // unstable features.
-        // NOT SUPPORTED??? .no_unstable_rust()
         // The input header we would like to generate
         // bindings for.
         .rustfmt_bindings(true)
         .header("wrapper.h")
+        // Tell cargo to invalidate the built crate whenever any of the
+        // included header files changed.
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.

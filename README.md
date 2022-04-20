@@ -28,7 +28,7 @@ apt-get install libbz2-dev
 
 **WARNING!**
 
-Bindgen and its compoonents are heavily dependent
+Bindgen and its components are heavily dependent
 on specific Rust versions. Here are versions installed on my Debian 11:
 
 ```bash
@@ -43,20 +43,32 @@ cargo 1.46.0
 
 ## Setup for openSUSE 15.3
 
+After endless package conflicts (where `rustfmt` package
+wanted other version of `cargo` package than `rls`, etc...)
+I eneded up using just `rustup` + clang for bindgen
+
 Install these packages:
 ```bash
-sudo zypper in clang-devel llvm-devel cargo rust libbz2-devel
+sudo zypper in clang-devel llvm-devel libbz2-devel rustup
 ```
+
+If you have not yet setup `rustup` then run:
+```bash
+rustup-init
+```
+Accept defaults and you will have to `source ~/.bashrc` to get
+proper Paths.
+
 
 These versions were tested:
 ```bash
 $ rustc -V
 
-rustc 1.59.0
+rustc 1.60.0 (7737e0b5c 2022-04-04)
 
 $ cargo -V
 
-cargo 1.59.0
+cargo 1.60.0 (d1fd9fe 2022-03-01)
 ```
 
 ## Building and testing
@@ -78,7 +90,8 @@ find . -name bindings.rs
 ./target/debug/build/bindgen-ex-d2edd0f08708c93d/out/bindings.rs
 ```
 
-Unfortunately it is tightly packed. However you can install `rustfmt` and use it to format
+Unfortunately (on Debian only!!) it is tightly packed.
+However you can install `rustfmt` and use it to format
 above file, for example:
 
 To install rustfmt (I was unable to find DEB package in stock Debian 11 as of 2022-04-19):
@@ -88,9 +101,9 @@ curl -fLO https://github.com/rust-lang/rustfmt/releases/download/v1.4.38/rustfmt
 tar xvzf rustfmt_linux-x86_64_v1.4.38.tar.gz 
 sudo cp rustfmt_linux-x86_64_v1.4.38/rustfmt /usr/local/bin/
 ```
-Above is recommended even for openSUSE because their `rustfmt` package
-requires older version of Cargo.
 
+NOTE: When using `rustup` you already will have `rustfmt` installed and
+available.
 
 And then try command like:
 ```bash

@@ -19,33 +19,43 @@ Updates:
 Start with https://rust-lang.github.io/rust-bindgen/requirements.html
 
 ```bash
-sudo apt install llvm-dev libclang-dev clang
-# additionally these are needed (cargo will install rustc)
-apt-get install libclang-11-dev cargo
+sudo apt install llvm-dev libclang-dev clang libclang-11-dev
+# these needed for rustup and building native interfaces (libc-sys)
+sudo apt-get install curl gcc libc-dev
 # for this tutorial only
-apt-get install libbz2-dev
+sudo apt-get install libbz2-dev
 ```
 
-**WARNING!**
+If you have not installed rust yet run these commands:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -o setup-rust.sh https://sh.rustup.rs
+# review setup script
+less setup-rust.sh
+# run it
+chmod +x setup-rust.sh
+./setup-rust.sh
+# accept defaults
+# run this command to update our PATH
+source ~/.bashrc
+```
 
-Bindgen and its components are heavily dependent
-on specific Rust versions. Here are versions installed on my Debian 11:
+Here are rustc and cargo versions used
 
 ```bash
 $ rustc -V
 
-rustc 1.48.0
+rustc 1.60.0 (7737e0b5c 2022-04-04)
 
 $ cargo -V
 
-cargo 1.46.0
+cargo 1.60.0 (d1fd9fe 2022-03-01)
 ```
 
 ## Setup for openSUSE 15.3
 
 After endless package conflicts (where `rustfmt` package
 wanted other version of `cargo` package than `rls`, etc...)
-I eneded up using just `rustup` + clang for bindgen
+I eneded up using just `rustup` (as in Debian) + clang for bindgen
 
 Install these packages:
 ```bash
@@ -90,22 +100,8 @@ find . -name bindings.rs
 ./target/debug/build/bindgen-ex-d2edd0f08708c93d/out/bindings.rs
 ```
 
-Unfortunately (on Debian only!!) it is tightly packed.
-However you can install `rustfmt` and use it to format
-above file, for example:
-
-To install rustfmt (I was unable to find DEB package in stock Debian 11 as of 2022-04-19):
-```bash
-cd
-curl -fLO https://github.com/rust-lang/rustfmt/releases/download/v1.4.38/rustfmt_linux-x86_64_v1.4.38.tar.gz
-tar xvzf rustfmt_linux-x86_64_v1.4.38.tar.gz 
-sudo cp rustfmt_linux-x86_64_v1.4.38/rustfmt /usr/local/bin/
-```
-
-NOTE: When using `rustup` you already will have `rustfmt` installed and
-available.
-
-And then try command like:
+If above file is compressed you can format it using
+`rustfmt` (should be already available when using `rustup`):
 ```bash
 rustfmt ./target/debug/build/bindgen-ex-d2edd0f08708c93d/out/bindings.rs
 ```
@@ -140,7 +136,4 @@ fn main() -> Result<(),Utf8Error> {
     Ok(())
 }
 ```
-
-
-
 
